@@ -48,7 +48,8 @@ public class SubReqServer {
 		    .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			public void initChannel(SocketChannel ch) {
-			    ch.pipeline()
+				//NOTE-UPUP 2021/4/2 上午1:11 : 用netty自己的Object编解码器, 内部实现就是jdkSerialize...,点击去看代码。
+				ch.pipeline()
 				    .addLast(
 					    new ObjectDecoder(
 						    1024 * 1024,
@@ -57,6 +58,7 @@ public class SubReqServer {
 								    .getClass()
 								    .getClassLoader())));
 			    ch.pipeline().addLast(new ObjectEncoder());
+
 			    ch.pipeline().addLast(new SubReqServerHandler());
 			}
 		    });

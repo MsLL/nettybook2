@@ -45,11 +45,13 @@ public class SubReqClient {
                     @Override
                     public void initChannel(SocketChannel ch)
                         throws Exception {
+                        //NOTE-UPUP 2021/4/2 上午1:11 : 用netty自己的Object编解码器, 内部实现就是jdkSerialize...,点击去看代码。
                         ch.pipeline().addLast(
                             new ObjectDecoder(1024, ClassResolvers
                                 .cacheDisabled(this.getClass()
                                     .getClassLoader())));
                         ch.pipeline().addLast(new ObjectEncoder());
+
                         ch.pipeline().addLast(new SubReqClientHandler());
                     }
                 });
