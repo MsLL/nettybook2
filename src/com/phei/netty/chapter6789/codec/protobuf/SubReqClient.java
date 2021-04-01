@@ -46,15 +46,20 @@ public class SubReqClient {
 			@Override
 			public void initChannel(SocketChannel ch)
 				throws Exception {
-			    ch.pipeline().addLast(
+
+				//NOTE-UPUP 2021/4/2 上午12:49 : 添加ProtobufVarin解/编码器
+				ch.pipeline().addLast(
 				    new ProtobufVarint32FrameDecoder());
 			    ch.pipeline().addLast(
 				    new ProtobufDecoder(
 					    SubscribeRespProto.SubscribeResp
 						    .getDefaultInstance()));
+
 			    ch.pipeline().addLast(
 				    new ProtobufVarint32LengthFieldPrepender());
 			    ch.pipeline().addLast(new ProtobufEncoder());
+
+
 			    ch.pipeline().addLast(new SubReqClientHandler());
 			}
 		    });

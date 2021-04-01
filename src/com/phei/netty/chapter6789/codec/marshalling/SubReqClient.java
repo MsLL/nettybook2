@@ -42,12 +42,15 @@ public class SubReqClient {
                     @Override
                     public void initChannel(SocketChannel ch)
                         throws Exception {
+
+                        //NOTE-UPUP 2021/4/2 上午12:49 : 添加Marshalling编解码器
                         ch.pipeline().addLast(
                             MarshallingCodeCFactory
                                 .buildMarshallingDecoder());
                         ch.pipeline().addLast(
                             MarshallingCodeCFactory
                                 .buildMarshallingEncoder());
+
                         ch.pipeline().addLast(new SubReqClientHandler());
                     }
                 });
