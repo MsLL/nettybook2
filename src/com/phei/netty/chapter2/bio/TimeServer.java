@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.pio;
+package com.phei.netty.chapter2.bio;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import com.phei.netty.chapter2.bio.TimeServerHandler;
 
 /**
  * @author lilinfeng
@@ -48,11 +46,9 @@ public class TimeServer {
 	    server = new ServerSocket(port);
 	    System.out.println("The time server is start in port : " + port);
 	    Socket socket = null;
-	    TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(
-		    50, 10000);// 创建IO任务线程池
 	    while (true) {
 		socket = server.accept();
-		singleExecutor.execute(new TimeServerHandler(socket));
+		new Thread(new TimeServerHandler(socket)).start();
 	    }
 	} finally {
 	    if (server != null) {

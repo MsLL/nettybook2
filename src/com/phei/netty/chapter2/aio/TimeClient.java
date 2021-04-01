@@ -13,29 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.pio;
-
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-import com.phei.netty.chapter2.bio.TimeServerHandler;
+package com.phei.netty.chapter2.aio;
 
 /**
  * @author lilinfeng
  * @date 2014年2月14日
  * @version 1.0
  */
-public class TimeServer {
+public class TimeClient {
 
     /**
      * @param args
-     * @throws IOException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 	int port = 8080;
 	if (args != null && args.length > 0) {
-
 	    try {
 		port = Integer.valueOf(args[0]);
 	    } catch (NumberFormatException e) {
@@ -43,23 +35,8 @@ public class TimeServer {
 	    }
 
 	}
-	ServerSocket server = null;
-	try {
-	    server = new ServerSocket(port);
-	    System.out.println("The time server is start in port : " + port);
-	    Socket socket = null;
-	    TimeServerHandlerExecutePool singleExecutor = new TimeServerHandlerExecutePool(
-		    50, 10000);// 创建IO任务线程池
-	    while (true) {
-		socket = server.accept();
-		singleExecutor.execute(new TimeServerHandler(socket));
-	    }
-	} finally {
-	    if (server != null) {
-		System.out.println("The time server close");
-		server.close();
-		server = null;
-	    }
-	}
+	new Thread(new AsyncTimeClientHandler("127.0.0.1", port),
+		"AIO-AsyncTimeClientHandler-001").start();
+
     }
 }
