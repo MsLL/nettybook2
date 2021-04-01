@@ -22,32 +22,33 @@ import io.netty.channel.ChannelHandlerContext;
 
 /**
  * @author lilinfeng
- * @date 2014年2月14日
  * @version 1.0
+ * @date 2014年2月14日
  */
 public class TimeServerHandler extends ChannelHandlerAdapter {
 
     @Override
+    //NOTE-UPUP 2021/4/2 上午12:16 : channelRead对客户端/服务端的语义都是一样的，就是从channel通道里面读到消息之后，做出一些行为。
     public void channelRead(ChannelHandlerContext ctx, Object msg)
-	    throws Exception {
-	ByteBuf buf = (ByteBuf) msg;
-	byte[] req = new byte[buf.readableBytes()];
-	buf.readBytes(req);
-	String body = new String(req, "UTF-8");
-	System.out.println("The time server receive order : " + body);
-	String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
-		System.currentTimeMillis()).toString() : "BAD ORDER";
-	ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
-	ctx.write(resp);
+        throws Exception {
+        ByteBuf buf = (ByteBuf) msg;
+        byte[] req = new byte[buf.readableBytes()];
+        buf.readBytes(req);
+        String body = new String(req, "UTF-8");
+        System.out.println("The time server receive order : " + body);
+        String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(
+            System.currentTimeMillis()).toString() : "BAD ORDER";
+        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
+        ctx.write(resp);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-	ctx.flush();
+        ctx.flush();
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-	ctx.close();
+        ctx.close();
     }
 }
