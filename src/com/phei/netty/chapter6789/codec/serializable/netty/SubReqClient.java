@@ -46,6 +46,7 @@ public class SubReqClient {
                     public void initChannel(SocketChannel ch)
                         throws Exception {
                         //NOTE-UPUP 2021/4/2 上午1:11 : 用netty自己的Object编解码器, 内部实现就是jdkSerialize...,点击去看代码。
+                        //NOTE-UPUP 2021/4/2 上午1:18 : ObjectDecoder继承了LengthFieldBasedFrameDecoder；ObjectEncoder里面写了LENGTH_PLACEHOLDER 所以不用加粘包/拆包器了。
                         ch.pipeline().addLast(
                             new ObjectDecoder(1024, ClassResolvers
                                 .cacheDisabled(this.getClass()
