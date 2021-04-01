@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.phei.netty.codec.marshalling;
+package com.phei.netty.chapter6789.codec.serializable.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -23,6 +23,9 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.serialization.ClassResolvers;
+import io.netty.handler.codec.serialization.ObjectDecoder;
+import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
@@ -45,12 +48,15 @@ public class SubReqServer {
 		    .childHandler(new ChannelInitializer<SocketChannel>() {
 			@Override
 			public void initChannel(SocketChannel ch) {
-			    ch.pipeline().addLast(
-				    MarshallingCodeCFactory
-					    .buildMarshallingDecoder());
-			    ch.pipeline().addLast(
-				    MarshallingCodeCFactory
-					    .buildMarshallingEncoder());
+			    ch.pipeline()
+				    .addLast(
+					    new ObjectDecoder(
+						    1024 * 1024,
+						    ClassResolvers
+							    .weakCachingConcurrentResolver(this
+								    .getClass()
+								    .getClassLoader())));
+			    ch.pipeline().addLast(new ObjectEncoder());
 			    ch.pipeline().addLast(new SubReqServerHandler());
 			}
 		    });

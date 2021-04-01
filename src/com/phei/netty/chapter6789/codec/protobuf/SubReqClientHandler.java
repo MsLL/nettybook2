@@ -13,12 +13,13 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.phei.netty.codec.marshalling;
+package com.phei.netty.chapter6789.codec.protobuf;
 
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
-import com.phei.netty.codec.pojo.SubscribeReq;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author lilinfeng
@@ -41,14 +42,18 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
 	ctx.flush();
     }
 
-    private SubscribeReq subReq(int i) {
-	SubscribeReq req = new SubscribeReq();
-	req.setAddress("NanJing YuHuaTai");
-	req.setPhoneNumber("138xxxxxxxxx");
-	req.setProductName("Netty Book For Marshalling");
-	req.setSubReqID(i);
-	req.setUserName("Lilinfeng");
-	return req;
+    private SubscribeReqProto.SubscribeReq subReq(int i) {
+	SubscribeReqProto.SubscribeReq.Builder builder = SubscribeReqProto.SubscribeReq
+		.newBuilder();
+	builder.setSubReqID(i);
+	builder.setUserName("Lilinfeng");
+	builder.setProductName("Netty Book For Protobuf");
+	List<String> address = new ArrayList<>();
+	address.add("NanJing YuHuaTai");
+	address.add("BeiJing LiuLiChang");
+	address.add("ShenZhen HongShuLin");
+	builder.addAllAddress(address);
+	return builder.build();
     }
 
     @Override

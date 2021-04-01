@@ -13,58 +13,44 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.phei.netty.codec.serializable.netty;
+package com.phei.netty.chapter6789.codec.serializable.netty;
 
+import com.phei.netty.chapter6789.codec.pojo.SubscribeReq;
+import com.phei.netty.chapter6789.codec.pojo.SubscribeResp;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-
-import com.phei.netty.codec.pojo.SubscribeReq;
 
 /**
  * @author lilinfeng
  * @date 2014年2月14日
  * @version 1.0
  */
-public class SubReqClientHandler extends ChannelHandlerAdapter {
-
-    /**
-     * Creates a client-side handler.
-     */
-    public SubReqClientHandler() {
-    }
-
-    @Override
-    public void channelActive(ChannelHandlerContext ctx) {
-	for (int i = 0; i < 10; i++) {
-	    ctx.write(subReq(i));
-	}
-	ctx.flush();
-    }
-
-    private SubscribeReq subReq(int i) {
-	SubscribeReq req = new SubscribeReq();
-	req.setAddress("南京市雨花台区软件大道101号华为基地");
-	req.setPhoneNumber("138xxxxxxxxx");
-	req.setProductName("Netty 最佳实践和原理分析");
-	req.setSubReqID(i);
-	req.setUserName("Lilinfeng");
-	return req;
-    }
+@Sharable
+public class SubReqServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
 	    throws Exception {
-	System.out.println("Receive server response : [" + msg + "]");
+	SubscribeReq req = (SubscribeReq) msg;
+	if ("Lilinfeng".equalsIgnoreCase(req.getUserName())) {
+	    System.out.println("Service accept client subscrib req : ["
+		    + req.toString() + "]");
+	    ctx.writeAndFlush(resp(req.getSubReqID()));
+	}
     }
 
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-	ctx.flush();
+    private SubscribeResp resp(int subReqID) {
+	SubscribeResp resp = new SubscribeResp();
+	resp.setSubReqID(subReqID);
+	resp.setRespCode(0);
+	resp.setDesc("Netty book order succeed, 3 days later, sent to the designated address");
+	return resp;
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
 	cause.printStackTrace();
-	ctx.close();
+	ctx.close();// 发生异常，关闭链路
     }
 }

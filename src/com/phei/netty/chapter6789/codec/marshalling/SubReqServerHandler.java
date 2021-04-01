@@ -13,43 +13,44 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.phei.netty.codec.protobuf;
+package com.phei.netty.chapter6789.codec.marshalling;
 
+import com.phei.netty.chapter6789.codec.pojo.SubscribeReq;
+import com.phei.netty.chapter6789.codec.pojo.SubscribeResp;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
  * @author lilinfeng
- * @date 2014年2月14日
  * @version 1.0
+ * @date 2014年2月14日
  */
 @Sharable
 public class SubReqServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
-	    throws Exception {
-	SubscribeReqProto.SubscribeReq req = (SubscribeReqProto.SubscribeReq) msg;
-	if ("Lilinfeng".equalsIgnoreCase(req.getUserName())) {
-	    System.out.println("Service accept client subscribe req : ["
-		    + req.toString() + "]");
-	    ctx.writeAndFlush(resp(req.getSubReqID()));
-	}
+        throws Exception {
+        SubscribeReq req = (SubscribeReq) msg;
+        if ("Lilinfeng".equalsIgnoreCase(req.getUserName())) {
+            System.out.println("Service accept client subscrib req : ["
+                + req.toString() + "]");
+            ctx.writeAndFlush(resp(req.getSubReqID()));
+        }
     }
 
-    private SubscribeRespProto.SubscribeResp resp(int subReqID) {
-	SubscribeRespProto.SubscribeResp.Builder builder = SubscribeRespProto.SubscribeResp
-		.newBuilder();
-	builder.setSubReqID(subReqID);
-	builder.setRespCode(0);
-	builder.setDesc("Netty book order succeed, 3 days later, sent to the designated address");
-	return builder.build();
+    private SubscribeResp resp(int subReqID) {
+        SubscribeResp resp = new SubscribeResp();
+        resp.setSubReqID(subReqID);
+        resp.setRespCode(0);
+        resp.setDesc("Netty book order succeed, 3 days later, sent to the designated address");
+        return resp;
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-	cause.printStackTrace();
-	ctx.close();// 发生异常，关闭链路
+        cause.printStackTrace();
+        ctx.close();// 发生异常，关闭链路
     }
 }

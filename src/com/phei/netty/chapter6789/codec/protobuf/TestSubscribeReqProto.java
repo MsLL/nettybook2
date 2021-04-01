@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.codec.protobuf;
+package com.phei.netty.chapter6789.codec.protobuf;
 
 import java.util.ArrayList;
 import java.util.List;
