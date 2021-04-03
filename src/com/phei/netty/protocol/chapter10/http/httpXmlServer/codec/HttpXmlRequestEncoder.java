@@ -1,4 +1,4 @@
-package com.phei.netty.protocol.chapter.http.xml.codec;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.codec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

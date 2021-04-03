@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -25,8 +25,8 @@ import org.jibx.runtime.IMarshallingContext;
 import org.jibx.runtime.IUnmarshallingContext;
 import org.jibx.runtime.JiBXException;
 
-import com.phei.netty.protocol.chapter.http.xml.pojo.Order;
-import com.phei.netty.protocol.chapter.http.xml.pojo.OrderFactory;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.Order;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.OrderFactory;
 
 /**
  * @author Lilinfeng

@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml.server;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.server;
 
 import static io.netty.handler.codec.http.HttpHeaders.isKeepAlive;
 import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpResponseStatus.INTERNAL_SERVER_ERROR;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlRequest;
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlResponse;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlRequest;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlResponse;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -38,8 +38,8 @@ import io.netty.util.concurrent.GenericFutureListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.phei.netty.protocol.chapter.http.xml.pojo.Address;
-import com.phei.netty.protocol.chapter.http.xml.pojo.Order;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.Address;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.Order;
 
 /**
  * @author lilinfeng

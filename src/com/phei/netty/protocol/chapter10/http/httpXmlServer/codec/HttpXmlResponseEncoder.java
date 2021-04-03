@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml.codec;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.codec;
 
 import static io.netty.handler.codec.http.HttpHeaders.setContentLength;
 import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;

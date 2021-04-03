@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml.client;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.client;
 
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlRequest;
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlResponse;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlRequest;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlResponse;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import com.phei.netty.protocol.chapter.http.xml.pojo.OrderFactory;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.OrderFactory;
 
 /**
  * @author Administrator

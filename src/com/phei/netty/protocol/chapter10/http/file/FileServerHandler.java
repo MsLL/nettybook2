@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.file;
+package com.phei.netty.protocol.chapter10.http.file;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.DefaultFileRegion;

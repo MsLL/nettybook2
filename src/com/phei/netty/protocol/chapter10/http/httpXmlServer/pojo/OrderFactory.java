@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml.pojo;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo;
 
 /**
  * @author Administrator

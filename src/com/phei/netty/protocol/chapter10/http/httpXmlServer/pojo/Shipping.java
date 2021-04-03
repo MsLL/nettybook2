@@ -1,4 +1,4 @@
-package com.phei.netty.protocol.chapter.http.xml.pojo;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo;
 
 /**
  * Supported shipment methods. The "INTERNATIONAL" shipment methods can only be

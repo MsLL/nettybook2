@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.phei.netty.protocol.chapter.http.xml.server;
+package com.phei.netty.protocol.chapter10.http.httpXmlServer.server;
 
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlRequestDecoder;
-import com.phei.netty.protocol.chapter.http.xml.codec.HttpXmlResponseEncoder;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlRequestDecoder;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.codec.HttpXmlResponseEncoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -30,7 +30,7 @@ import io.netty.handler.codec.http.HttpResponseEncoder;
 
 import java.net.InetSocketAddress;
 
-import com.phei.netty.protocol.chapter.http.xml.pojo.Order;
+import com.phei.netty.protocol.chapter10.http.httpXmlServer.pojo.Order;
 
 /**
  * @author lilinfeng
