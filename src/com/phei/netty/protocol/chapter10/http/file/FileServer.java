@@ -54,14 +54,14 @@ public class FileServer {
                     public void initChannel(SocketChannel ch)
                         throws Exception {
                         ch.pipeline().addLast(
+                            //Decoder是对输入做处理。
+                            //NOTE-UPUP 2021/4/2 上午12:10 : xxxDecoder是实现了ChannelHandlerAdapter的channelRead方法。
+                            new LineBasedFrameDecoder(1024),
+                            new StringDecoder(CharsetUtil.UTF_8),
+
                         	//Encoder是对输出做处理
                         	//NOTE-UPUP 2021/4/2 上午12:07 : xxxEncoder是实现了ChannelHandlerAdapter的write方法，
                             new StringEncoder(CharsetUtil.UTF_8),
-
-                            //Decoder是对输入做处理。
-							//NOTE-UPUP 2021/4/2 上午12:10 : xxxDecoder是实现了ChannelHandlerAdapter的channelRead方法。
-                            new LineBasedFrameDecoder(1024),
-                            new StringDecoder(CharsetUtil.UTF_8),
 
                             //NOTE-UPUP 2021/4/2 上午12:13 : 业务handel。
                             new FileServerHandler());

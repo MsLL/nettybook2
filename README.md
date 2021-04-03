@@ -9,4 +9,18 @@
 
 有关该书的更多信息可以关注李林峰老师的微博 @Nettying 以及查看其在ifeve网站上的文章：http://ifeve.com/author/linfeng/
 
+# 项目结构及运行说明及代码分析
 
+## chapter10
+
+### file demo project
+
+package path：com.phei.netty.protocol.chapter10.http.file
+
+#### 测试运行
+
+没有包装成http的东西，FileServer启起来之后，用nc工具连` nc -v localhost 8080`。
+
+测试输入目标文件路径(相对于程序pwd目录，在idea下面跑，就是该项目根目录)：
+
+连上去之后，测试输入一个不存在的文件`xxx`，响应`File not found: xxx`；测试输入一个存在的文件`pom.xml`，响应是整个文件的内容。
