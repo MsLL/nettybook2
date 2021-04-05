@@ -51,15 +51,20 @@ public class SubReqServer {
                     public void initChannel(SocketChannel ch) {
                         //NOTE-UPUP 2021/4/2 上午12:49 : 添加ProtobufVarin解/编码器
 
-                        //为什么被注释掉了？
+                        //NOTE-UPUP 2021/4/5 上午1:51 : 1.去掉表示消息长度的消息头
                         ch.pipeline().addLast(
                             new ProtobufVarint32FrameDecoder());
+                        //NOTE-UPUP 2021/4/5 上午1:52 : 2.消息体解码为对象
                         ch.pipeline().addLast(
                             new ProtobufDecoder(
                                 SubscribeReqProto.SubscribeReq
                                     .getDefaultInstance()));
+
+                        //NOTE-UPUP 2021/4/5 上午2:01 :  Netty中，可以注册多个handler。ChannelInboundHandler按照注册的先后顺序执行；ChannelOutboundHandler按照注册的先后顺序逆序执行
+                        //NOTE-UPUP 2021/4/5 上午2:56 : 2.出站消息加上长度头
                         ch.pipeline().addLast(
                             new ProtobufVarint32LengthFieldPrepender());
+                        //NOTE-UPUP 2021/4/5 上午2:55 : 1.出站消息先编码
                         ch.pipeline().addLast(new ProtobufEncoder());
 
                         ch.pipeline().addLast(new SubReqServerHandler());
